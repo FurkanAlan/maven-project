@@ -1,0 +1,27 @@
+#https://jsonformatter.org/yaml-validator/874a1e
+#https://docs.docker.com/compose/compose-file/
+#https://github.com/jenkinsci/docker/issues/177
+version: '3'
+services:
+  jenkins:
+
+    container_name: jenkins
+    image: jenkins/jenkins
+
+    ports:
+      - "8080:8080"
+
+    volumes:
+      - $PWD/jenkins_home:/var/jenkins_home
+    networks:
+      - net
+  remote_host:
+    container_name: remote-host-cont
+    image: remote-host-img
+    build:
+      context: centos7
+    networks:
+      - net
+networks:
+  net:
+
